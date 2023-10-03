@@ -1,8 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using ConsoleTest.Extentions;
+using SeedData;
+
 Console.WriteLine("Hello, World!");
 
-var x = "ahmed";
+//var ahmedList = Filter.getAhmeds(GetData.GetCustomers());
+var ahmedList = GetData.GetCustomers().getByName("mohmed");
 
-if (x != null) { }
 
-//x = 11;
+foreach (var ahmed in ahmedList)
+{
+    Console.WriteLine($" name {ahmed.name} : age {ahmed.age} ");
+}
+
+
+
+
