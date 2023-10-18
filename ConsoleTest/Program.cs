@@ -1,22 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-using ConsoleTest.Extentions;
-using SeedData;
-using SeedData.Models;
+using System.Linq;
 
-bool checkCustoemr (Customer  customer)
-{
-    if (customer != null && customer.age > 30 && customer.isActive)
-        return true; 
-    else 
-        return false;
-}
+List<int> myList = new List<int> { 1, 2, 3, 4, 5, 6 , 7, 8 , 9 , 10 };
+List<string> stringList = new List<string>
+             { "ahmed mohamady", "mohamed ahmed", "mo salah", "sayd ahmed" };
 
+//Enumerable.Where()
 
-var custList = GetData.GetCustomers().getCustomers(c => c.age > 30 && c.isActive);
+//var result = myList.Where(l => l > 5);
 
-foreach (var cust in custList)
+var result = from l in myList
+             where l > 5
+             select l;
+
+foreach (var item in result)
 { 
-  Console.WriteLine($" name {cust.name}, age {cust.age} ");
+   Console.WriteLine(item);
 }
