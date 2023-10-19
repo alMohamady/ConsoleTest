@@ -5,24 +5,22 @@ using SeedData;
 using SeedData.Models;
 using System.Linq;
 
+//var elemnt = GetData.GetCustomers().ElementAtOrDefault(700);
 
+//var single = GetData.GetCustomers().SingleOrDefault(x => x.id == 101);
 
-//var order = GetData.GetCustomers()
-//                   .OrderBy(x => x.age).First(x => x.age > 30);
+//var count = GetData.GetCustomers().Count(x => x.age > 30);
 
-var theOrdr = GetData.GetOrders().FirstOrDefault(x => x.Id > 1 ,new Order() { total= 10 });
+var max = GetData.GetCustomers().Max(x => x.age); //min
+var maxCustomer = GetData.GetCustomers().Max(); // min 
 
+//if(maxCustomer != null)
+//Console.WriteLine(maxCustomer.name);  
 
+var avrage = GetData.GetCustomers().Average(x => x.spendAverage);
+var sum = GetData.GetCustomers().Sum(x => x.spendAverage);
 
-
-//var order2 = (from o in GetData.GetCustomers()
-//             orderby o.age descending
-//             select o).First();
-  
-//Console.WriteLine("Id: {0} , name: {1}, age: {2} " 
-//        , order.id, order.name, order.age);
-
-Console.WriteLine("====================================");
-
-//Console.WriteLine("Id: {0} , name: {1}, age: {2} "
-//      , order2.id, order2.name, order2.age);
+//if (single != null)
+//    Console.WriteLine(single.name);
+//else
+//    Console.WriteLine("No here");

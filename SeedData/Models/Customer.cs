@@ -1,7 +1,7 @@
 ﻿
 namespace SeedData.Models
 {
-    public class Customer
+    public class Customer : IComparable<Customer>
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -11,5 +11,10 @@ namespace SeedData.Models
         public int categoryId { get; set; }
         public bool isActive { get; set; }
         public DateTime joinDate { get; set; }
+
+        public int CompareTo(Customer? other)
+        {
+            return this.age;
+        }
     }
 }
