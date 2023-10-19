@@ -10,7 +10,7 @@ using System.Linq;
 //             { "ahmed mohamady", "mohamed ahmed", "mo salah", "sayd ahmed" };
 
 
-var customers = GetData.GetCustomers().Where(x => x.age > 30).Select(
+var customers = GetData.GetCustomers().Where((x, i) => x.age > 30 && i >= 3).Select(
        a => new CustomerDto
        {
            customerName = a.name,
@@ -22,8 +22,8 @@ var customers2 = from cust in GetData.GetCustomers()
                where cust.age > 30
                select new 
                {
-                   customerName = cust.name,
-                   customerPhone = cust.telephone,
+                   cust.name,
+                   cust.telephone,
                };
 
 
