@@ -5,32 +5,23 @@ using SeedData;
 using SeedData.Models;
 using System.Linq;
 
-//List<int> myList = new List<int> { 1, 2, 3, 4, 5, 6 , 7, 8 , 9 , 10 };
-//List<string> stringList = new List<string>
-//             { "ahmed mohamady", "mohamed ahmed", "mo salah", "sayd ahmed" };
 
 
-//var customers = GetData.GetCustomers().Where((x, i) => x.age > 30 && i >= 3).Select(
-//       a => new CustomerDto
-//       {
-//           customerName = a.name,
-//           customerPhone = a.telephone,
-//       }
-//    );
+var orderList = GetData.GetCustomers()
+                .OrderByDescending(x => x.age)
+                .ThenBy(x => x.name);
+                //.OrderBy(x => x.age);
 
-var customers2 = from cust in GetData.GetCustomers()
-               select new 
-               {
-                   cust.name,
-                   cust.telephone,
-                   _age = cust.age
-               }
-               into c
-               where c._age > 30 
-               select c;
+var orderList2 = from o in GetData.GetCustomers()
+                 orderby o.age descending, o.name descending
+                 select o;
 
+foreach (var order in orderList)   
+    Console.WriteLine("Id: {0} , name: {1}, age: {2} " 
+        , order.id, order.name, order.age);
 
-foreach (var customer in customers2)
-{
-    Console.WriteLine(customer.name);
-}
+Console.WriteLine("====================================");
+
+foreach (var order in orderList2)
+    Console.WriteLine("Id: {0} , name: {1}, age: {2} "
+        , order.id, order.name, order.age);
