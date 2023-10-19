@@ -7,15 +7,18 @@ List<int> myList = new List<int> { 1, 2, 3, 4, 5, 6 , 7, 8 , 9 , 10 };
 List<string> stringList = new List<string>
              { "ahmed mohamady", "mohamed ahmed", "mo salah", "sayd ahmed" };
 
-//Enumerable.Where()
 
-//var result = myList.Where(l => l > 5);
+var names = stringList.Where(x => x.Contains("ahmed"));
 
-var result = from l in myList
-             where l > 5
-             select l;
+//foreach (var name in names)
+//{
+//    Console.WriteLine(name);  
+//}
 
-foreach (var item in result)
-{ 
-   Console.WriteLine(item);
+stringList.Remove("mohamed ahmed");
+stringList.AddRange(new string[] { "saeed salah", "ahmed morad", "ahmed ahmed" });
+
+foreach (var name in names)
+{
+    Console.WriteLine(name);
 }
