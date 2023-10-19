@@ -7,21 +7,22 @@ using System.Linq;
 
 
 
-var orderList = GetData.GetCustomers()
-                .OrderByDescending(x => x.age)
-                .ThenBy(x => x.name);
-                //.OrderBy(x => x.age);
+//var order = GetData.GetCustomers()
+//                   .OrderBy(x => x.age).First(x => x.age > 30);
 
-var orderList2 = from o in GetData.GetCustomers()
-                 orderby o.age descending, o.name descending
-                 select o;
+var theOrdr = GetData.GetOrders().FirstOrDefault(x => x.Id > 1 ,new Order() { total= 10 });
 
-foreach (var order in orderList)   
-    Console.WriteLine("Id: {0} , name: {1}, age: {2} " 
-        , order.id, order.name, order.age);
+
+
+
+//var order2 = (from o in GetData.GetCustomers()
+//             orderby o.age descending
+//             select o).First();
+  
+//Console.WriteLine("Id: {0} , name: {1}, age: {2} " 
+//        , order.id, order.name, order.age);
 
 Console.WriteLine("====================================");
 
-foreach (var order in orderList2)
-    Console.WriteLine("Id: {0} , name: {1}, age: {2} "
-        , order.id, order.name, order.age);
+//Console.WriteLine("Id: {0} , name: {1}, age: {2} "
+//      , order2.id, order2.name, order2.age);

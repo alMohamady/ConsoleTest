@@ -30,5 +30,10 @@ namespace SeedData
             return customers;
         }
 
+        public static List<Order> GetOrders()
+        {
+            List<Order> orders = new List<Order>();  
+            return orders;
+        }
     }
 }
