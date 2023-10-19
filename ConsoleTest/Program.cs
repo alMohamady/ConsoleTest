@@ -10,24 +10,27 @@ using System.Linq;
 //             { "ahmed mohamady", "mohamed ahmed", "mo salah", "sayd ahmed" };
 
 
-var customers = GetData.GetCustomers().Where((x, i) => x.age > 30 && i >= 3).Select(
-       a => new CustomerDto
-       {
-           customerName = a.name,
-           customerPhone = a.telephone,
-       }
-    );
+//var customers = GetData.GetCustomers().Where((x, i) => x.age > 30 && i >= 3).Select(
+//       a => new CustomerDto
+//       {
+//           customerName = a.name,
+//           customerPhone = a.telephone,
+//       }
+//    );
 
 var customers2 = from cust in GetData.GetCustomers()
-               where cust.age > 30
                select new 
                {
                    cust.name,
                    cust.telephone,
-               };
+                   _age = cust.age
+               }
+               into c
+               where c._age > 30 
+               select c;
 
 
-foreach (var customer in customers)
+foreach (var customer in customers2)
 {
-    Console.WriteLine(customer.customerName);
+    Console.WriteLine(customer.name);
 }
