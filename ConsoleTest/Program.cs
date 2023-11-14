@@ -5,22 +5,29 @@ using SeedData;
 using SeedData.Models;
 using System.Linq;
 
-//var elemnt = GetData.GetCustomers().ElementAtOrDefault(700);
+var cats = GetData.GetCategories();
+var custs = GetData.GetCustomers();
 
-//var single = GetData.GetCustomers().SingleOrDefault(x => x.id == 101);
+var result = cats.Join(custs,
+                       cat => cat.Id, cust => cust.categoryId, 
+                       (cat , cust) => new { 
+                           fullName = cust.name, 
+                           catName = cat.Name,
+                       });
 
-//var count = GetData.GetCustomers().Count(x => x.age > 30);
+foreach(var item in result)
+    Console.WriteLine(item.fullName + ":" + item.catName);
 
-var max = GetData.GetCustomers().Max(x => x.age); //min
-var maxCustomer = GetData.GetCustomers().Max(); // min 
+Console.WriteLine("=======================================");
 
-//if(maxCustomer != null)
-//Console.WriteLine(maxCustomer.name);  
+var result2 = from cat in cats
+              join cust in custs
+              on cat.Id equals cust.categoryId
+              select new
+              {
+                  fullName = cust.name,
+                  catName = cat.Name,
+              };
 
-var avrage = GetData.GetCustomers().Average(x => x.spendAverage);
-var sum = GetData.GetCustomers().Sum(x => x.spendAverage);
-
-//if (single != null)
-//    Console.WriteLine(single.name);
-//else
-//    Console.WriteLine("No here");
+foreach (var item in result2)
+    Console.WriteLine(item.fullName + ":" + item.catName);

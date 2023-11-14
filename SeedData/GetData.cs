@@ -9,7 +9,7 @@ namespace SeedData
         {
             List<CustomerCategory> categories = new List<CustomerCategory>();
             categories.Add(new CustomerCategory() { Id = 1, Name = "normal" });
-            categories.Add(new CustomerCategory() { Id = 1, Name = "VIP" });
+            categories.Add(new CustomerCategory() { Id = 2, Name = "VIP" });
             return categories;
         }
 
