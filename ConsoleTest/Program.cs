@@ -8,41 +8,29 @@ using System.Linq;
 var cats = GetData.GetCategories();
 var custs = GetData.GetCustomers();
 
-var result = cats.GroupJoin(custs,
-                       cat => cat.Id, cust => cust.categoryId, 
-                       (cat , cust) => new { 
-                           myCustomers = cust, 
-                           catName = cat.Name,
-                       });
+var result = custs.GroupBy(c => c.categoryId); // Deferred
+var resultlp = custs.ToLookup(c => c.categoryId); // Immediate
 
-foreach (var item in result)
+foreach (var g in result)
 {
-    Console.WriteLine("category :" + item.catName);
-    if (item.myCustomers != null)
+    Console.WriteLine($"Category Number: {g.Key}");
+    foreach (var c in g)
     {
-        foreach (var c in item.myCustomers)
-            Console.WriteLine("----->" + c.name);
+        Console.WriteLine("------>" + c.name);
     }
 }
 
-Console.WriteLine("=======================================");
+Console.WriteLine("======================");
 
-var result2 = from cat in cats
-              join cust in custs
-              on cat.Id equals cust.categoryId
-              into customers
-              select new
-              {
-                  myCustomers = customers,
-                  catName = cat.Name,
-              };
+var result2 = from c in custs
+              group c by c.categoryId;
+var reusltTl = (from c in custs select c).ToLookup(c => c.categoryId);
 
-foreach (var item in result2)
+foreach (var g in result2)
 {
-    Console.WriteLine("category :" + item.catName);
-    if (item.myCustomers != null)
+    Console.WriteLine($"Category Number: {g.Key}");
+    foreach (var c in g)
     {
-        foreach (var c in item.myCustomers)
-            Console.WriteLine("----->" + c.name);
+        Console.WriteLine("------>" + c.name);
     }
 }
