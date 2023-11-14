@@ -5,32 +5,28 @@ using SeedData;
 using SeedData.Models;
 using System.Linq;
 
-var cats = GetData.GetCategories();
-var custs = GetData.GetCustomers();
+var r = Enumerable.Range(1, 1000);
 
-var result = custs.GroupBy(c => c.categoryId); // Deferred
-var resultlp = custs.ToLookup(c => c.categoryId); // Immediate
+var e = Enumerable.Empty<Customer>();
 
-foreach (var g in result)
-{
-    Console.WriteLine($"Category Number: {g.Key}");
-    foreach (var c in g)
-    {
-        Console.WriteLine("------>" + c.name);
-    }
-}
+var rep = Enumerable.Repeat(100, 4);
 
-Console.WriteLine("======================");
+var cust = GetData.GetCustomers().FirstOrDefault();
+var rep2 = Enumerable.Repeat(cust, 4);
 
-var result2 = from c in custs
-              group c by c.categoryId;
-var reusltTl = (from c in custs select c).ToLookup(c => c.categoryId);
+//====================================
 
-foreach (var g in result2)
-{
-    Console.WriteLine($"Category Number: {g.Key}");
-    foreach (var c in g)
-    {
-        Console.WriteLine("------>" + c.name);
-    }
-}
+List<string> names = new List<string>() 
+{ "Ahmed Moahamdy", "Mohamed Salah", "alaa khaled"};
+
+var sm = names.SelectMany(element => element.Split(' '));
+
+foreach (var name in sm)
+    Console.WriteLine(name);
+
+var smq = from n in names
+          from ns in n.Split(" ")
+          select ns;
+
+foreach (var name in smq)
+    Console.WriteLine(name);
