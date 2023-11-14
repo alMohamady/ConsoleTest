@@ -8,26 +8,41 @@ using System.Linq;
 var cats = GetData.GetCategories();
 var custs = GetData.GetCustomers();
 
-var result = cats.Join(custs,
+var result = cats.GroupJoin(custs,
                        cat => cat.Id, cust => cust.categoryId, 
                        (cat , cust) => new { 
-                           fullName = cust.name, 
+                           myCustomers = cust, 
                            catName = cat.Name,
                        });
 
-foreach(var item in result)
-    Console.WriteLine(item.fullName + ":" + item.catName);
+foreach (var item in result)
+{
+    Console.WriteLine("category :" + item.catName);
+    if (item.myCustomers != null)
+    {
+        foreach (var c in item.myCustomers)
+            Console.WriteLine("----->" + c.name);
+    }
+}
 
 Console.WriteLine("=======================================");
 
 var result2 = from cat in cats
               join cust in custs
               on cat.Id equals cust.categoryId
+              into customers
               select new
               {
-                  fullName = cust.name,
+                  myCustomers = customers,
                   catName = cat.Name,
               };
 
 foreach (var item in result2)
-    Console.WriteLine(item.fullName + ":" + item.catName);
+{
+    Console.WriteLine("category :" + item.catName);
+    if (item.myCustomers != null)
+    {
+        foreach (var c in item.myCustomers)
+            Console.WriteLine("----->" + c.name);
+    }
+}
