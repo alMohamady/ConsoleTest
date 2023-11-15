@@ -14,6 +14,33 @@ namespace SeedData
             return categories;
         }
 
+        public static List<CustomerCategory> GetCategories(IEnumerable<Customer> customers)
+        {
+            List<CustomerCategory> categories = new List<CustomerCategory>();
+            categories.Add(new CustomerCategory() { 
+                Id = 1, 
+                Name = "normal", 
+                customer = from cust in customers
+                           where cust.categoryId == 1
+                           select cust
+            });
+            categories.Add(new CustomerCategory() { 
+                Id = 2, 
+                Name = "VIP",
+                customer = from cust in customers
+                           where cust.categoryId == 2
+                           select cust
+            });
+            categories.Add(new CustomerCategory() { 
+                Id = 3, 
+                Name = "Blocked",
+                customer = from cust in customers
+                           where cust.categoryId == 3
+                           select cust
+            });
+            return categories;
+        }
+
         public static List<Customer> GetCustomers()
         { 
             List<Customer> customers = new List<Customer>();

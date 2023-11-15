@@ -4,26 +4,22 @@
 using SeedData;
 using SeedData.Models;
 using System.Linq;
-using System.Text.RegularExpressions;
-
-List<string> names = new List<string>()
-{ "@hmed" , "Mo&ed", "3alah"  };
-
-//var Result = from n in names
-//             select Regex.Replace(n, "[@&3]", "_")
-//             into newVal
-//             where newVal.ToLower().Contains("m")
-//             orderby newVal.Length
-//             select newVal;
-
-var Result = from n in names
-             let newVal = Regex.Replace(n, "[@&3]", "_")
-             where newVal.ToLower().Contains("m")
-             orderby newVal.Length , n.Length
-             select newVal;
-
-foreach (var name in Result)
-    Console.WriteLine(name);
 
 
+var cats = GetData.GetCategories(GetData.GetCustomers());
 
+//var list = cats.Select(c => c.customer);
+//foreach (var c in list)
+//{
+//    foreach (var cust in c)
+//    {
+//        Console.WriteLine(cust.id + " : " + cust.name);
+//    }
+//}
+
+
+var list = cats.SelectMany(c => c.customer);
+foreach (var c in list)
+{
+        Console.WriteLine(c.id + " : " + c.name);
+}
