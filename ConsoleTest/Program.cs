@@ -4,18 +4,26 @@
 using SeedData;
 using SeedData.Models;
 using System.Linq;
+using System.Text.RegularExpressions;
 
-//var result = GetData.GetCustomers().Skip(2);
-//var result = GetData.GetCustomers().SkipWhile(x => x.age < 25);
-//var result = GetData.GetCustomers().SkipLast(5);
+List<string> names = new List<string>()
+{ "@hmed" , "Mo&ed", "3alah"  };
 
-//var result = GetData.GetCustomers().Take(15);
-//var result = GetData.GetCustomers().TakeWhile(x => x.age < 25);
-var result = GetData.GetCustomers().TakeLast(5);
+//var Result = from n in names
+//             select Regex.Replace(n, "[@&3]", "_")
+//             into newVal
+//             where newVal.ToLower().Contains("m")
+//             orderby newVal.Length
+//             select newVal;
 
-foreach (var item in result)
-{
-    Console.WriteLine(item.id + ":" + item.name + ":" + item.age);
-}
+var Result = from n in names
+             let newVal = Regex.Replace(n, "[@&3]", "_")
+             where newVal.ToLower().Contains("m")
+             orderby newVal.Length , n.Length
+             select newVal;
+
+foreach (var name in Result)
+    Console.WriteLine(name);
+
 
 
