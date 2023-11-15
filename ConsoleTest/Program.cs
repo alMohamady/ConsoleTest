@@ -3,30 +3,30 @@
 
 using SeedData;
 using SeedData.Models;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-//var isAllAge = GetData.GetCustomers().All(e => e.name.Contains("ahmed"));
-//Console.WriteLine(isAllAge.ToString());
+List<String> names  = new List<String>()
+{ "Ahmed Mohamady", "Mohamed Salah", "Zaki gom3a" };
+
+var nums = Enumerable.Range(0, 10);
+
+var result = names.Zip(nums);
+var result2 = GetData.GetCustomers().Zip(nums, (c, i) => new { i, c.name });
 
 
-//var isAnyAge = GetData.GetCustomers().Any(e => e.name.Contains("ahmed"));
-//Console.WriteLine(isAnyAge.ToString());
+foreach (var item in result2)
+    Console.WriteLine(item.i + ":" + item.name);
 
-var cust = new Customer { id = 101, name = "ahmed mohmed", age = 30, isActive = true, joinDate = new DateTime(2022, 10, 15), categoryId = 1, spendAverage = 1500.9m, telephone = 123456789 };
+Console.WriteLine("===================================================");
 
-var isContAge = GetData.GetCustomers().Contains(cust, new CustCompar());
-Console.WriteLine(isContAge.ToString());
+//var L1 = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+//var L2 = new List<int> { 1, 2, 3, 8, 5, 0, 7 };
+//var result3 = L1.SequenceEqual(L2);
 
-public class CustCompar : IEqualityComparer<Customer>
-{
-    public bool Equals(Customer? x, Customer? y)
-    {
-        return x.id == y.id;
-    }
+var custList1 = GetData.GetCustomers();
+var custList2 = GetData.GetCustomers();
 
-    public int GetHashCode([DisallowNull] Customer obj)
-    {
-        return obj.id.GetHashCode();
-    }
-}
+var result3 = custList1.SequenceEqual(custList2);
+
+Console.WriteLine(result3);
+ 
