@@ -5,22 +5,17 @@ using SeedData;
 using SeedData.Models;
 using System.Linq;
 
-//var data = GetData.GetCustomers().Aggregate<Customer, string, string>
-//    ("the deserve discounts : ", (s, e) =>
-//    {
-//        var discount = e.spendAverage * 0.5m;
-//        s = s + $" {e.name} : {discount} ,";
-//        return s;
-//    }, o => o.Replace(":", "->").Substring(0, o.Length - 2));
+//var result = GetData.GetCustomers().Skip(2);
+//var result = GetData.GetCustomers().SkipWhile(x => x.age < 25);
+//var result = GetData.GetCustomers().SkipLast(5);
 
-//Console.WriteLine(data);
+//var result = GetData.GetCustomers().Take(15);
+//var result = GetData.GetCustomers().TakeWhile(x => x.age < 25);
+var result = GetData.GetCustomers().TakeLast(5);
 
-//List<int> list = new List<int>();
-var list = new List<CustomerCategory>(); //GetData.GetCategories();
-var reslut = list.DefaultIfEmpty(new CustomerCategory() { Id = 0 , Name = "N" });
-
-foreach (var item in reslut)
-{ 
-   Console.WriteLine(item.Name);
+foreach (var item in result)
+{
+    Console.WriteLine(item.id + ":" + item.name + ":" + item.age);
 }
+
 
